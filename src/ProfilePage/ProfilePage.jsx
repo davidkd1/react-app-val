@@ -11,13 +11,6 @@ import { Card } from "semantic-ui-react";
 import { Container, Header, List } from "semantic-ui-react";
 import Nav from "../NavBar/NavBar";
 
-const styleLink = document.createElement("link");
-styleLink.rel = "stylesheet";
-styleLink.href =
-  "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
-
-document.head.appendChild(styleLink);
-
 class ProfilePage extends React.Component {
   componentDidMount() {
     //  this.props.dispatch(userActions.getAll());

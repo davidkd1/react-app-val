@@ -9,6 +9,13 @@ import { HomePage } from "../HomePage";
 import { ProfilePage } from "../ProfilePage";
 import { LoginPage } from "../LoginPage";
 
+const styleLink = document.createElement("link");
+styleLink.rel = "stylesheet";
+styleLink.href =
+  "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+
+document.head.appendChild(styleLink);
+
 class App extends React.Component {
   constructor(props) {
     super(props);
