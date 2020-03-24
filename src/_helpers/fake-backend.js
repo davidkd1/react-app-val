@@ -6,7 +6,8 @@ export function configureFakeBackend() {
       password: "test",
       firstName: "David",
       lastName: "Garrick",
-      NhsNO: "802839404"
+      NhsNO: "802839404",
+      Dob: "20/04/1994"
     }
   ];
   let realFetch = window.fetch;
@@ -33,6 +34,7 @@ export function configureFakeBackend() {
               firstName: user.firstName,
               lastName: user.lastName,
               NhsNO: user.NhsNO,
+              Dob: user.Dob,
               token: "fake-jwt-token"
             };
             resolve({
