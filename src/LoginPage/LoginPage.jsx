@@ -65,7 +65,7 @@ class LoginPage extends React.Component {
           verticalAlign="middle"
         >
           <Grid.Column style={{ maxWidth: 450 }}>
-            <Header as="h2" color="rgb(64, 152, 225)" textAlign="center">
+            <Header as="h2" color="blue" textAlign="center">
               Valitudo Dashboard
             </Header>
             <Form size="large" onSubmit={this.handleSubmit}>
@@ -88,13 +88,13 @@ class LoginPage extends React.Component {
                   )}
                 </div>
 
-                <Button color="#4098e1" fluid size="large">
+                <Button color="blue" fluid size="large">
                   Login
                 </Button>
               </Segment>
             </Form>
             <Message>
-              New to us? <a href="#">Sign Up</a>
+              Don't have a Code ? <a href="#">help</a>
             </Message>
           </Grid.Column>
         </Grid>

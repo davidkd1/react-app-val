@@ -4,67 +4,183 @@ import { connect } from "react-redux";
 
 import { userActions } from "../_actions";
 
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
+import LineChart from "./line";
 
 import Nav from "../NavBar/NavBar";
 
-import { makeStyles } from "@material-ui/core/styles";
+import { Table } from "semantic-ui-react";
+
+import Grid from "react-css-grid";
+
+import { Card } from "semantic-ui-react";
+
+import { Container, Header, List, Button } from "semantic-ui-react";
+
+import { Segment, Portal } from "semantic-ui-react";
+
+import data from "./jsonData";
 
 //import "./Nav.css"
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9)
-];
-
 class HomePage extends React.Component {
-  componentDidMount() {
-    //  this.props.dispatch(userActions.getAll());
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: [],
+      sub_BloodGlu: true,
+      sub_CategoryPeak: true,
+      sub_CategoryBloodPres: true,
+      dataSource: {}
+    };
   }
 
+  componentDidMount() {
+    return fetch("https://reactnative.dev/movies.json")
+      .then(response => response.json())
+      .then(responseJson => {
+        this.setState(
+          {
+            dataSource: responseJson.movies
+          },
+          function() {}
+        );
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  myFunction(item) {
+    alert(item);
+  }
   render() {
-    const { user, users } = this.props;
+    if (this.state.sub_BloodGlu) {
+      var test = (
+        <div>
+          <Container style={{ margin: 20 }}>
+            <Table celled inverted color="purple" selectable>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell colSpan="3">sub_BloodGlu</Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell>Date</Table.HeaderCell>
+                  <Table.HeaderCell>Level</Table.HeaderCell>
+                  <Table.HeaderCell>Time</Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+
+              <Table.Body>
+                {data.sub_BloodGlu.slice(0, 3).map(item => {
+                  return (
+                    <Table.Row onClick={() => this.myFunction(item.date)}>
+                      <Table.Cell key={item.id}>{item.date}</Table.Cell>
+                      <Table.Cell key={item.id}>{item.level}</Table.Cell>
+                      <Table.Cell key={item.id}>{item.time}</Table.Cell>
+                    </Table.Row>
+                  );
+                })}
+              </Table.Body>
+            </Table>
+          </Container>
+        </div>
+      );
+    }
+
+    if (this.state.sub_CategoryPeak) {
+      var test2 = (
+        <div>
+          <Container style={{ margin: 20 }}>
+            <Table celled inverted color="green" selectable>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell colSpan="3">
+                    sub_CategoryPeak
+                  </Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell>Date</Table.HeaderCell>
+                  <Table.HeaderCell>Level</Table.HeaderCell>
+                  <Table.HeaderCell>Time</Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+
+              <Table.Body>
+                {data.sub_CategoryPeak.slice(0, 3).map(item => {
+                  return (
+                    <Table.Row onClick={() => this.myFunction(item.date)}>
+                      <Table.Cell key={item.id}>{item.date}</Table.Cell>
+                      <Table.Cell key={item.id}>{item.level}</Table.Cell>
+                      <Table.Cell key={item.id}>{item.time}</Table.Cell>
+                    </Table.Row>
+                  );
+                })}
+              </Table.Body>
+            </Table>
+          </Container>
+        </div>
+      );
+    }
+
+    if (this.state.sub_CategoryBloodPres) {
+      var test3 = (
+        <div>
+          <Container style={{ margin: 20 }}>
+            <Table celled inverted color="red" selectable>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell colSpan="3">
+                    sub_CategoryBloodPres
+                  </Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell>Date</Table.HeaderCell>
+                  <Table.HeaderCell>Level</Table.HeaderCell>
+                  <Table.HeaderCell>Time</Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+
+              <Table.Body>
+                {data.sub_CategoryBloodPres.slice(0, 3).map(item => {
+                  return (
+                    <Table.Row onClick={() => this.myFunction(item.date)}>
+                      <Table.Cell key={item.id}>{item.date}</Table.Cell>
+                      <Table.Cell key={item.id}>
+                        {item.level} / {item.level2}
+                      </Table.Cell>
+                      <Table.Cell key={item.id}>{item.time}</Table.Cell>
+                    </Table.Row>
+                  );
+                })}
+              </Table.Body>
+            </Table>
+          </Container>
+        </div>
+      );
+    }
+
+    const { user, users, items } = this.props;
     return (
       <div>
         <Nav send={this.props} />
-        <TableContainer component={Paper}>
-          <Table style={style.table} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Dessert (100g serving)</TableCell>
-                <TableCell align="right">Calories</TableCell>
-                <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                <TableCell align="right">Protein&nbsp;(g)</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map(row => (
-                <TableRow key={row.name}>
-                  <TableCell component="th" scope="row">
-                    {row.name}
-                  </TableCell>
-                  <TableCell align="right">{row.calories}</TableCell>
-                  <TableCell align="right">{row.fat}</TableCell>
-                  <TableCell align="right">{row.carbs}</TableCell>
-                  <TableCell align="right">{row.protein}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+
+        <Grid width={320} gap={24}>
+          {test}
+          {test2}
+          {test3}
+
+          <div />
+        </Grid>
+
+        <Card style={{ width: 600, padding: 30, margin: 20 }}>
+          <LineChart />
+        </Card>
       </div>
     );
   }

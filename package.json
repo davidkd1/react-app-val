@@ -10,6 +10,7 @@
   "dependencies": {
     "@material-ui/core": "4.9.7",
     "@material-ui/icons": "4.9.1",
+    "@opd/g2plot-react": "1.1.0",
     "config": "3.3.0",
     "mdbreact": "4.25.4",
     "react": "16.12.0",

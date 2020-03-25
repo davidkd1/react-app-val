@@ -22,7 +22,7 @@ class ProfilePage extends React.Component {
       <div>
         <Nav />
 
-        <Grid width={320} gap={24}>
+        <Grid width={320} gap={10}>
           <div>
             <Container style={{ margin: 20 }}>
               <Card.Group>
@@ -31,6 +31,19 @@ class ProfilePage extends React.Component {
                     <Card.Header>
                       {user.firstName} {user.lastName}
                     </Card.Header>
+                    <Card.Meta>Nhs No. {user.NhsNO}</Card.Meta>
+                    <Card.Description>Dob: {user.Dob}</Card.Description>
+                  </Card.Content>
+                </Card>
+              </Card.Group>
+            </Container>
+          </div>
+          <div>
+            <Container style={{ margin: 20 }}>
+              <Card.Group>
+                <Card>
+                  <Card.Content>
+                    <Card.Header>Data send on: 25/03/2019</Card.Header>
                     <Card.Meta>Nhs No. {user.NhsNO}</Card.Meta>
                     <Card.Description>Dob: {user.Dob}</Card.Description>
                   </Card.Content>
